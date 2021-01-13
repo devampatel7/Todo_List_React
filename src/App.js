@@ -1,23 +1,74 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import Tasks from './Tasks';
+import TextBox from './TextBox';
+
 import './App.css';
 
+
+
+
 function App() {
+  
+const [inputText, setInputText] = useState("");
+
+const [todos, setTodos] = useState([]);
+
+const [todoID, setID] = useState(0);
+
+const [comptodos, setCompTodos] = useState([]);
+
+const [status, setStatus] = useState("All");
+
+const [filterTodos, setfilterTodos] = useState([]);
+
+
+const FilterHandler = (e) =>{
+
+  switch(status){
+    case "Completed":
+      setfilterTodos(comptodos);
+      break;
+    case "Incomplete":
+      setfilterTodos(todos);
+      break;
+    default:
+      setfilterTodos(todos.concat(comptodos));
+      break;
+  }
+}
+
+useEffect(()=>{
+  FilterHandler();
+}, [status, todos, comptodos]);
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 >Todo List</h1>
+      <h2 className = "credit"> by Devam Patel</h2>
+      < TextBox 
+      inputText = {inputText} 
+      setInputText = {setInputText}
+      todos = {todos}
+      setTodos = {setTodos}
+      todoID = {todoID}
+      setID = {setID}
+      setStatus = {setStatus}
+       />
+      
+      
+      < Tasks 
+      todos={todos} 
+      setTodos={setTodos} 
+      comptodos={comptodos} 
+      setCompTodos={setCompTodos} 
+      filterTodos = {filterTodos}
+      />
+      
+     
+    
+    
+      
     </div>
   );
 }
