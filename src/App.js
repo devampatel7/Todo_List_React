@@ -45,7 +45,7 @@ useEffect(()=>{
 
     <div className="App">
       <h1 >Todo List</h1>
-      <h2 className = "credit"> by Devam Patel</h2>
+      <h2 className = "credit"> by Devam Patel Rutgers University</h2>
       < TextBox 
       inputText = {inputText} 
       setInputText = {setInputText}
